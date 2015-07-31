@@ -75,3 +75,4 @@ The following was tested and does not parse
 - **Not** between, ie. `$where=date not between '2015-01-10T12:00:00' and '2015-01-10T14:00:00'` ([reference](http://dev.socrata.com/docs/functions/not_between.html))
 - Escaping single quote by doubling, ie. `$where=text_value='Bob''s string'` ([reference](http://dev.socrata.com/docs/datatypes/text.html))
 - Double pipe concatenate, ie. `$select=theft_date, dc_dist || dc_num AS dist_dc` ([reference](http://dev.socrata.com/docs/datatypes/text.html))
+- Free text search, ie. `$q=foobar` ([reference](http://dev.socrata.com/docs/queries.html#search-with-q)) ([see issue](https://github.com/timwis/node-soda2-parser/issues/1))

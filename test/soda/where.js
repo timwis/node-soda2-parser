@@ -76,6 +76,12 @@ describe('where test',function(){
     ast.where.operator.should.eql('%')
   });
 
+  /* http://dev.socrata.com/docs/queries.html#search-with-q
+  it('freetext', function() {
+    var ast = Parser.parse('$where=FREETEXT(*, \'foo\')')
+    inspect(ast)
+  });*/
+
   /* http://dev.socrata.com/docs/datatypes/text.html
   it('escaping by doubling', function() {
     var ast = Parser.parse("$where=text_value='Bob''s string'")
