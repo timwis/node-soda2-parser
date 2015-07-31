@@ -7,6 +7,15 @@ function inspect(obj) {
 
 describe('where test',function(){
 
+  it('filter', function() {
+    var ast = Parser.parse('$select=foo, bar&foo=1&$where=bar = 2')
+    //inspect(ast)
+
+    ast.where.left.left.column.should.eql('bar')
+    ast.where.right.left.column.should.eql('foo')
+    ast.where.right.operator.should.eql('=')
+  });
+
   it('expression', function() {
     var ast = Parser.parse('$where=magnitude > 3.0');
     //inspect(ast);

@@ -55,6 +55,7 @@ Unit tests in `test/soda` ensure the following functionality from the [SODA2 doc
 - Operators, ie. `$select=depth * 3.28 AS depth_feet`
 
 ### $where
+- Basic filters, ie. `foo=bar&animal=lion`
 - Expressions
 - Recursive And/Or
 - Functions, ie. `$where=within_box(incident_location, 47.5998951, -122.33707, 47.5942794, -122.3270522)`
