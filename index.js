@@ -2,7 +2,7 @@ var qs = require('querystring'),
   sqlparser = require('node-sqlparser');
 
 // Converts AST to SQL
-exports.stringify = sqlparser.stringify;
+exports.stringify = require('./stringify');
 
 // Converts SQL to AST
 exports.parse = function(params) {
