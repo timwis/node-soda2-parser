@@ -41,7 +41,7 @@ var ast = Parser.parse("$select=date, type, magnitude&$where=magnitude > 3.0 and
 ```
 With this AST, you can:
 
-- Convert it to clean SQL using `Parser.stringify(ast)`
+- Convert it to clean SQL using `Parser.stringify(ast)` (as seen in [soda-postgres](https://github.com/timwis/soda-postgres))
 - Write recursive functions to translate it to another query language
 - Write recursive functions to interact with an ORM
 - Print it out and hang it on the wall
