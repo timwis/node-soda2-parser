@@ -5,7 +5,7 @@ function inspect(obj) {
   console.log(require('util').inspect(obj, false, 10, true));
 }
 
-describe('select test',function(){
+describe('select test', function() {
 
   it('multiple fields', function() {
     var ast = Parser.parse('$select=foo, bar')

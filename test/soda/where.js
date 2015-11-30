@@ -6,6 +6,17 @@ function inspect(obj) {
 }
 
 describe('where test',function(){
+  
+  it('named filter sets types', function() {
+    var ast = Parser.parse('foo=1&baz=quz')
+    //inspect(ast)
+    
+    ast.where.left.left.column.should.eql('foo')
+    ast.where.left.right.value.should.eql(1)
+    
+    ast.where.right.left.column.should.eql('baz')
+    ast.where.right.right.value.should.eql('quz')
+  })
 
   it('filter', function() {
     var ast = Parser.parse('$select=foo, bar&foo=1&$where=bar = 2')
