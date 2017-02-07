@@ -258,16 +258,12 @@ exports.orderby = function(orderby, options) {
   return cs.join(', ');
 }
 
-exports.limit = function(limit, options) {
-  options = options || {};
-  //TODO, use exprToSQL instead
-  //limit is [number, number]
-  var str;
-  if (options.offset !== false) {
-    str = limit[0].value + ', ' + limit[1].value;
-  } else {
-    str = (limit[0].value + limit[1].value);
-  }
+exports.limit = function(limitOffset, options) {
+  var limit = limitOffset[1].value;
+  var offset = limitOffset[0].value;
+
+  var str = limit;
+  if (offset > 0) str += ' OFFSET ' + offset;
   return str;
 }
 

@@ -36,8 +36,9 @@ exports.parse = function(params) {
   if(params.$group) sql += ' GROUP BY ' + params.$group;
   if(params.$order) sql += ' ORDER BY ' + params.$order;
   if(params.$limit) {
-    sql += ' LIMIT ' + params.$limit;
-    if(params.$offset) sql += ', ' + params.$offset;
+    sql += ' LIMIT ';
+    if(params.$offset) sql += params.$offset + ', ';
+    sql += params.$limit;
   }
 
   return sqlparser.parse(sql);
