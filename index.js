@@ -34,6 +34,7 @@ exports.parse = function(params) {
 };
 
 function whereEqual (key, value) {
-  var unquotedValue = value.replace(/^['"]|['"]$/g, '')
-  return key + " = '" + unquotedValue + "'";
+  var sanitizedValue = value.replace(/^['"]|['"]$/g, '') // remove surrounding quotes
+                            .replace(/\'/g, "\\'") // escape inner quotes
+  return key + " = '" + sanitizedValue + "'";
 }
