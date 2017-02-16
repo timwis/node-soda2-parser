@@ -18,4 +18,11 @@ describe('stringify test', function() {
     sql.should.eql('SELECT foo LIMIT 5 OFFSET 10')
   });
 
+  it('named filter can contain a quote within', function() {
+    var ast = Parser.parse("foo=Philadelphia's district")
+    var sql = stringify.parse(ast)
+
+    sql.should.eql("SELECT * WHERE foo = 'Philadelphia''s district'")
+  })
+
 });

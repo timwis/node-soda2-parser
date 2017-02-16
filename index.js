@@ -4,17 +4,6 @@ var qs = require('querystring'),
 // Converts AST to SQL
 exports.stringify = require('./stringify');
 
-// Return quote-wrapped value for non numbers
-var typedValue = function(val) {
-  var lowerCaseVal = val.toLowerCase()
-  try {
-    JSON.parse(lowerCaseVal)
-    return lowerCaseVal
-  } catch(e) {
-    return '"' + val + '"'
-  }
-}
-
 // Converts SQL to AST
 exports.parse = function(params) {
   // If a string was passed, parse the querystring into an object
@@ -26,7 +15,7 @@ exports.parse = function(params) {
   var where = [];
   if(params.$where) where.push(params.$where);
   for(key in params) {
-    if(key.charAt(0) !== '$') where.push(key + ' = ' + typedValue(params[key]));
+    if(key.charAt(0) !== '$') where.push(whereEqual(key, params[key]));
   }
   params.$where = where.join(' AND ');
 
@@ -43,3 +32,9 @@ exports.parse = function(params) {
 
   return sqlparser.parse(sql);
 };
+
+function whereEqual (key, value) {
+  var sanitizedValue = value.replace(/^['"]|['"]$/g, '') // remove surrounding quotes
+                            .replace(/\'/g, "\\'") // escape inner quotes
+  return key + " = '" + sanitizedValue + "'";
+}

@@ -7,15 +7,21 @@ function inspect(obj) {
 
 describe('where test',function(){
   
-  it('named filter sets types', function() {
+  it('named filter sets all types to strings', function() {
     var ast = Parser.parse('foo=1&baz=quz')
     //inspect(ast)
     
     ast.where.left.left.column.should.eql('foo')
-    ast.where.left.right.value.should.eql(1)
+    ast.where.left.right.value.should.eql('1')
     
     ast.where.right.left.column.should.eql('baz')
     ast.where.right.right.value.should.eql('quz')
+  })
+
+  it('named filter can be quoted', function() {
+    var ast = Parser.parse("foo='1'")
+
+    ast.where.right.value.should.eql('1')
   })
 
   it('filter', function() {
