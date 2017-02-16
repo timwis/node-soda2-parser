@@ -18,6 +18,12 @@ describe('where test',function(){
     ast.where.right.right.value.should.eql('quz')
   })
 
+  it('named filter can be quoted', function() {
+    var ast = Parser.parse("foo='1'")
+
+    ast.where.right.value.should.eql('1')
+  })
+
   it('filter', function() {
     var ast = Parser.parse('$select=foo, bar&foo=1&$where=bar = 2')
     //inspect(ast)

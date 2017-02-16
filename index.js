@@ -15,7 +15,7 @@ exports.parse = function(params) {
   var where = [];
   if(params.$where) where.push(params.$where);
   for(key in params) {
-    if(key.charAt(0) !== '$') where.push(key + " = '" + params[key] + "'");
+    if(key.charAt(0) !== '$') where.push(whereEqual(key, params[key]));
   }
   params.$where = where.join(' AND ');
 
@@ -32,3 +32,8 @@ exports.parse = function(params) {
 
   return sqlparser.parse(sql);
 };
+
+function whereEqual (key, value) {
+  var unquotedValue = value.replace(/^['"]|['"]$/g, '')
+  return key + " = '" + unquotedValue + "'";
+}
