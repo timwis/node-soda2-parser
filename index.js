@@ -1,6 +1,8 @@
 var qs = require('querystring'),
   sqlparser = require('node-sqlparser');
 
+var excludeFields = ['accessType', 'bom'];
+
 // Converts AST to SQL
 exports.stringify = require('./stringify');
 
@@ -15,7 +17,9 @@ exports.parse = function(params) {
   var where = [];
   if(params.$where) where.push(params.$where);
   for(key in params) {
-    if(key.charAt(0) !== '$') where.push(whereEqual(key, params[key]));
+    if(key.charAt(0) !== '$' && excludeFields.indexOf(key) === -1) {
+      where.push(whereEqual(key, params[key]));
+    }
   }
   params.$where = where.join(' AND ');
 

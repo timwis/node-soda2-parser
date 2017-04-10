@@ -36,6 +36,11 @@ describe('select test', function() {
     ast.columns[2].expr.operator.should.eql('-')
   });
 
+  it('removes excluded fields', function() {
+    var ast = Parser.parse('$select=foo&accessType=download&bom=true')
+    should(ast.where).be.exactly(null)
+  });
+
   /* http://dev.socrata.com/docs/datatypes/text.html
   it('double pipe concatenate', function() {
     var ast = Parser.parse('$select=theft_date, dc_dist || dc_num AS dist_dc')
